@@ -1,35 +1,21 @@
 <template>
-  <div>
+  <div class="container">
     <div class="views">
       <div class="view">
-        <Statusbar></Statusbar>
-        <iframe src="/moments" frameborder="0"></iframe>
+        <iframe src="/view/moments" frameborder="0"></iframe>
       </div>
       <div class="view">
-        <Statusbar></Statusbar>
-        <iframe src="/moments" frameborder="0"></iframe>
+        <iframe src="/view/moments" frameborder="0"></iframe>
       </div>
       <div class="view">
-        <Statusbar></Statusbar>
-        <iframe src="/moments" frameborder="0"></iframe>
+        <iframe src="/view/moments" frameborder="0"></iframe>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Statusbar from 'components/Statusbar'
-
-export default {
-  components: {
-    Statusbar
-  },
-  data () {
-    return {
-      msg: 'Hello World!'
-    }
-  }
-}
+export default {}
 </script>
 
 <style lang="scss" scoped>

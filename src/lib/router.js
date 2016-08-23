@@ -19,10 +19,13 @@ router.map({
         component: require('../pages/Moments')
     },
     '/multi-moments': {
-        component: require('../pages/MultiMoments')
+        component: require('../pages/MomentsMulti')
     },
-    '/plaza': {
-        component: require('../pages/Plaza')
+    '/view/moments': {
+        component: require('../components/Moments')
+    },
+    '/view/plaza': {
+        component: require('../components/Plaza')
     },
     '*': {
         component: require('../pages/NotFound')

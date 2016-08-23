@@ -22,7 +22,7 @@ html {
 
 body {
   height: 100%;
-  overflow: hidden;
+  /*overflow: hidden;*/
   margin: 0;
   font-size: 14px;
   font-size: 1.4rem;

@@ -3,6 +3,8 @@
   <div>
       <status-item></status-item>
       <status-item></status-item>
+      <status-item></status-item>
+      <status-item></status-item>
   </div>
 </template>
 

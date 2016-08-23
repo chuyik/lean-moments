@@ -1,6 +1,6 @@
 <template>
   <div id="status-bar">
-      <img src="../assets/status-bar.png" alt="">
+    <img src="../assets/status-bar.png" alt="">
   </div>
 </template>
 
@@ -11,6 +11,7 @@ export default {}
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
     #status-bar {
+      z-index: 1;
       height: 2rem;
       > img {
           width: 100%;

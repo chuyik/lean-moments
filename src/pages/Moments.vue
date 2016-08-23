@@ -1,72 +1,37 @@
 <template>
-  <div class="moments-header">
-    <x-header :left-options="{showBack: false}">
-      朋友圈
-      <a slot="left" v-link="{ path: '/plaza' }">
-        <img class="retina" src="../assets/people@2x.png">
-      </a>
-      <a slot="right" @click="showCameraMenu=!showCameraMenu">
-        <img class="camera retina" src="../assets/camera@2x.png">
-      </a>
-    </x-header>
-    <actionsheet :show.sync="showCameraMenu" :menus="cameraMenus" @on-click-menu="clickCameraMenu" show-cancel :cancel-text="'取消'"></actionsheet>
-    <toast type="cancel" :show.sync="showShootMsg">选第二个，泻泻~</toast>
+  <div class="container">
+    <div class="view">
+      <iframe src="/view/moments" frameborder="0"></iframe>
+    </div>
   </div>
-  <div class="moments-content">
-    <user-cover :nickname="'腾奕'"></user-cover>
-    <status-list></status-list>
-  </div>
-  
 </template>
 
 <script>
-import {XHeader, Actionsheet, Toast} from 'vux-components'
-import UserCover from 'components/UserCover'
-import StatusList from 'components/StatusList'
-
-export default {
-  components: {
-    XHeader,
-    Actionsheet,
-    Toast,
-    UserCover,
-    StatusList
-  },
-  data () {
-    return {
-      showCameraMenu: false,
-      showShootMsg: false,
-      cameraMenus: {
-        shoot: '拍照',
-        album: '从相册中选择'
-      }
-    }
-  },
-  methods: {
-    clickCameraMenu (key) {
-      switch (key) {
-        case 'shoot':
-          this.showShootMsg = true
-          break
-        case 'album':
-          console.log('prepare to move to album')
-          break
-      }
-    }
-  }
-}
+export default {}
 </script>
 
 <style lang="scss" scoped>
-  .moments-header {
-    position: fixed;
+.container {
+  background: #aee0ae;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.view {
+  background: #FFF;
+  box-shadow: 0 0 10px #333;
+  width: 375px;
+  height: 677px;
+  margin: auto;
+
+  > iframe {
     width: 100%;
-    z-index: 1;
+    height:100%;
   }
-  img.camera {
-    float: right
-  }
-  .moments-content {
-    padding-top: 4.6rem;
-  }
+} 
 </style>
