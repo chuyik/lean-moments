@@ -8,13 +8,12 @@
 export default {
   data () {
     return {
-      msg: 'Hello moments!'
+      msg: 'Hello plaza!'
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 h1 {
   color: #42b983;

@@ -13,16 +13,19 @@ const router = new VueRouter({
 // Router Map
 router.map({
     '/': {
-        component: require('../components/Home')
+        component: require('../pages/Home')
     },
     '/moments': {
-        component: require('../components/Moments')
+        component: require('../pages/Moments')
+    },
+    '/multi-moments': {
+        component: require('../pages/MultiMoments')
     },
     '/plaza': {
-        component: require('../components/Plaza')
+        component: require('../pages/Plaza')
     },
     '*': {
-        component: require('../components/NotFound')
+        component: require('../pages/NotFound')
     }
 })
 

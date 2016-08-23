@@ -10,26 +10,50 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+* {
+  box-sizing: border-box;
+}
+
 html {
   height: 100%;
+  font-size: 62.5%;
 }
 
 body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 100%;
+  overflow: hidden;
+  margin: 0;
+  font-size: 14px;
+  font-size: 1.4rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+.clearfix:after {
+  content:"";
+  display:block;
+  clear:both;
 }
 
 #app {
-  color: #2c3e50;
-  font-family: Source Sans Pro, Helvetica, sans-serif;
-  text-align: center;
+  font-family: Helvetica, sans-serif;
 }
 
 #app a {
-  color: #42b983;
   text-decoration: none;
+}
+
+img.retina {
+  width: 50%;
+}
+
+/* override vux styles */
+div.vux-header, #status-bar {
+  background: rgba(0,0,0,0.90);
+}
+
+h1.vux-header-title {
+  margin: auto !important;
+  font-weight: 500 !important;
 }
 </style>
