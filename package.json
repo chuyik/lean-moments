@@ -12,7 +12,11 @@
   },
   "dependencies": {
     "babel-runtime": "^6.0.0",
+    "js-yaml": "^3.6.1",
     "leancloud-storage": "^1.3.3",
+    "lodash": "^4.15.0",
+    "moment": "^2.14.1",
+    "request": "^2.74.0",
     "sass-loader": "^4.0.0",
     "vue": "^1.0.21"
   },
@@ -43,7 +47,6 @@
     "json-loader": "^0.5.4",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
-    "moment": "^2.14.1",
     "node-sass": "^3.8.0",
     "ora": "^0.2.0",
     "sass-loader": "^4.0.0",

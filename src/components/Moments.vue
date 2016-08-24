@@ -4,33 +4,32 @@
     <Navbar></Navbar>
   </div>
   <div class="moments-content">
-    <user-cover :nickname="'腾奕'"></user-cover>
-    <status-list></status-list>
+    <Usercover :user="currentUser"></Usercover>
+    <Statuslist></Statuslist>
   </div>
   
 </template>
 
 <script>
-import {XHeader, Actionsheet, Toast} from 'vux-components'
+import AV from 'leancloud-storage'
+
 import Statusbar from './Statusbar'
 import Navbar from './MomentsNavbar'
-import UserCover from './UserCover'
-import StatusList from './StatusList'
+import Usercover from './UserCover'
+import Statuslist from './StatusList'
 
 export default {
   components: {
     Statusbar,
     Navbar,
-    XHeader,
-    Actionsheet,
-    Toast,
-    UserCover,
-    StatusList
+    Usercover,
+    Statuslist
   },
   data () {
     return {
       showCameraMenu: false,
       showShootMsg: false,
+      currentUser: AV.User.current(),
       cameraMenus: {
         shoot: '拍照',
         album: '从相册中选择'

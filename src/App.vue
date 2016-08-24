@@ -56,4 +56,12 @@ h1.vux-header-title {
   margin: auto !important;
   font-weight: 500 !important;
 }
+
+p.weui_toast_content {
+  margin: 5px 5px 15px;
+}
+
+.weui_toast {
+  width: 12rem !important;
+}
 </style>
