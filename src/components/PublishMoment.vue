@@ -29,8 +29,8 @@
 import AV from 'leancloud-storage'
 import {XHeader, Actionsheet, Toast, Loading} from 'vux-components'
 import {StatusDetail} from '../lib/models'
-
 import Statusbar from './Statusbar'
+import Push from '../lib/push'
 
 export default {
   components: {
@@ -89,7 +89,7 @@ export default {
             images: this.images,
             detail
           })
-          this.showPublishingMsg = true 
+          this.showPublishingMsg = true
           return AV.Status.sendStatusToFollowers(status)
         })
         .then(status => {
@@ -98,6 +98,9 @@ export default {
           setTimeout(() => {
             this.$router.go('/view/moments')
           }, 1000)
+          
+          // push message
+          Push.send(['new-status'], {itemId: status.id, publisherId: AV.User.current().id})
         })
         .catch(err => {
           console.error('publish failed, err: ', err)

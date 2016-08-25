@@ -15,6 +15,10 @@
       :pullup-config="pullupConfig">
 
       <Usercover :user="currentUser"></Usercover>
+      <div class="new-message" v-if="newMessageCount">
+        <div class="new-message-count">有 {{newMessageCount}} 条新消息</div>
+        <i></i>
+      </div>
       <Statuslist :status-items="statusItems"></Statuslist>
       <div class="scroller-footer"></div>
 
@@ -46,6 +50,7 @@ import Navbar from './MomentsNavbar'
 import Usercover from './UserCover'
 import Statuslist from './StatusList'
 import Reply from './Reply'
+import Push from '../lib/push'
 
 export default {
   components: {
@@ -71,7 +76,8 @@ export default {
       statusItems: [],
       messageId: null,
       replyStatusItem: null,
-      showReply: false
+      showReply: false,
+      newMessageCount: 0
     }
   },
   computed: {
@@ -116,25 +122,38 @@ export default {
     loadStatusItems (shouldReset) {
       let query = AV.Status.inboxQuery(this.currentUser)
       query.include(['source', 'source.avatar', 'images', 'detail', 'detail.likes', 'detail.comments'])
-      if (this.messageId)
+
+      if (!shouldReset && this.messageId)
         query.sinceId(this.messageId)
+
       return query.find()
         .then(statusItems => {
-          if (!statusItems.length)
-            return
+          if (!statusItems.length) return
 
-          if (shouldReset)
+          if (shouldReset) {
+            this.newMessageCount = 0
             this.statusItems.splice(0, this.statusItems.length)
+          }
           this.statusItems = this.statusItems.concat(statusItems)
           this.messageId = _.maxBy(statusItems, 'messageId').messageId
         })
         .catch(err => {
           console.error('Failed to load status items, err: ', err)
         })
+    },
+    receiveNewStatusMsg (data) {
+      console.log('new-status: ', data)
+
+      AV.Status.countUnreadStatuses(AV.User.current())
+      .then(({total, unread}) => {
+        this.newMessageCount = unread
+        console.log(`total ${total} status, ${unread} unread.`)
+      })
     }
   },
   ready () {
-    this.loadStatusItems()
+    this.loadStatusItems(true)
+    Push.addListener('new-status', this.receiveNewStatusMsg)
   }
 }
 </script>
@@ -192,5 +211,34 @@ export default {
   .scroller-footer {
     width: 100%;
     height: 20px;
+  }
+  .new-message {
+    width: 18rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    background: #393939;
+    border-radius: 4px;
+    position: relative;
+    padding: 5px;
+    margin: 40px 0 13px;
+    margin-left: auto;
+    margin-right: auto;
+
+    > .new-message-count {
+      font-family: PingFangSC-Medium;
+      font-size: 14px;
+      color: #FFFFFF;
+      width: 16rem;
+      text-align: center;
+    }
+    > i {
+      width: 6px;
+      height: 9.75px;
+      background: url('../assets/right-arrow@2x.png');
+      background-size: contain;
+      position: absolute;
+      right: 10px;
+    }
   }
 </style>
