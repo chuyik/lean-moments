@@ -1,10 +1,7 @@
 <template>
   
   <div>
-      <status-item></status-item>
-      <status-item></status-item>
-      <status-item></status-item>
-      <status-item></status-item>
+      <status-item :item="item" v-for="item in statusItems" track-by="id"></status-item>
   </div>
 </template>
 
@@ -15,6 +12,9 @@ import StatusItem from './StatusItem'
 export default {
   components: {
     StatusItem
+  },
+  props: {
+    statusItems: Array
   },
   data () {
     return {

@@ -6,7 +6,7 @@
       <a slot="right" @click="logOut" v-if="currentUser">注销</a>
     </x-header>
   </div>
-  <div>
+  <div class="view-contents">
     <div v-for="user in users" class="weui_cells_radio weui_media_box weui_media_appmsg">
       <div class="weui_media_hd">
         <img class="weui_media_appmsg_thumb" :src="user.get('avatar').get('url')">

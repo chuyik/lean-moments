@@ -35,6 +35,20 @@ body {
   clear:both;
 }
 
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.fixed-header {
+  position: fixed;
+  z-index: 100;
+}
+
+.view-contents {
+  padding-top: 6.6rem;
+}
+
 #app {
   font-family: Helvetica, sans-serif;
 }
@@ -43,13 +57,18 @@ body {
   text-decoration: none;
 }
 
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
+
 img.retina {
   width: 50%;
 }
 
 /* override vux styles */
 div.vux-header, #status-bar {
-  background: rgba(0,0,0,0.90);
+  background: rgba(43, 42, 47, 0.95);
 }
 
 h1.vux-header-title {
@@ -64,4 +83,6 @@ p.weui_toast_content {
 .weui_toast {
   width: 12rem !important;
 }
+
+
 </style>

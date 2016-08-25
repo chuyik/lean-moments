@@ -10,7 +10,7 @@
       </a>
     </x-header>
     <actionsheet :show.sync="showCameraMenu" :menus="cameraMenus" @on-click-menu="clickCameraMenu" show-cancel :cancel-text="'取消'"></actionsheet>
-    <toast type="cancel" :show.sync="showShootMsg">选第二个，泻泻~</toast>
+    <toast type="cancel" :show.sync="showShootMsg">请选第二个，泻泻~</toast>
   </div>
 </template>
 
@@ -40,7 +40,7 @@ export default {
           this.showShootMsg = true
           break
         case 'album':
-          console.log('prepare to move to album')
+          this.$router.go('/view/publish-moment')
           break
       }
     }

@@ -1,19 +1,30 @@
 <template>
   <div class="user-cover">
-    <div class="featured" :style="{background: 'url(' + user.get('cover').get('url') + ') no-repeat center center'}">
+    <div class="featured" :style="{'background': getImage('cover')}">
     </div>
     <div class="user-info">
-      <div class="nickname" v-text="user.get('nickname')"></div>
-      <div class="avatar" :style="{background: 'url(' + user.get('avatar').get('url') + ') no-repeat center center'}">
+      <div class="nickname" v-text="user && user.get('nickname')"></div>
+      <div class="avatar" :style="{'background': getImage('avatar')}">
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import AV from 'leancloud-storage'
+
 export default {
   props: {
-    user: Object
+    user: {
+      type: Object,
+      default: () => {AV.User.current()}
+    }
+  },
+  methods: {
+    getImage (key) {
+      if (this.user)
+        return `url(${this.user.get(key).get('url')}) no-repeat center center`
+    }
   }
 }
 </script>
@@ -33,6 +44,7 @@ export default {
     position: absolute;
     right: 1.2rem;
     bottom: -2.3rem;
+    z-index: 10;
 
     > .nickname {
       font-weight: bold;

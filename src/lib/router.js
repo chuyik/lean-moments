@@ -32,6 +32,9 @@ router.map({
         component: require('../components/Plaza'),
         public: true
     },
+    '/view/publish-moment': {
+        component: require('../components/PublishMoment')
+    },
     '*': {
         component: require('../pages/NotFound'),
         public: true
