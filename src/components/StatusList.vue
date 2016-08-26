@@ -1,7 +1,7 @@
 <template>
   
   <div>
-      <status-item :item="item" v-for="item in statusItems" track-by="id"></status-item>
+      <status-item :item="item" v-for="item in statusItems | orderBy 'createdAt' -1" track-by="id"></status-item>
   </div>
 </template>
 

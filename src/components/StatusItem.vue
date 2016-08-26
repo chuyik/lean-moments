@@ -164,7 +164,6 @@ export default {
             text: comment.get('text')
           }
         })
-        console.log('commentsData: ', commentsData)
         this.commentsData.splice(0, commentsData.length)
         this.commentsData = this.commentsData.concat(commentsData)
       })
