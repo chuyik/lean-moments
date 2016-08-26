@@ -1,10 +1,10 @@
 <template>
   <div class="user-cover">
-    <div class="featured" :style="{'background': getImage('cover')}">
+    <div class="featured" :style="{'background-image': getImage('cover')}">
     </div>
     <div class="user-info">
       <div class="nickname" v-text="user && user.get('nickname')"></div>
-      <div class="avatar" :style="{'background': getImage('avatar')}">
+      <div class="avatar" :style="{'background-image': getImage('avatar')}">
       </div>
     </div>
   </div>
@@ -23,7 +23,7 @@ export default {
   methods: {
     getImage (key) {
       if (this.user)
-        return `url(${this.user.get(key).get('url')}) no-repeat center center`
+        return `url(${this.user.get(key).get('url')})`
     }
   }
 }
@@ -61,7 +61,8 @@ export default {
     > .avatar {
       width: 7rem;
       height: 7rem;
-      background: #505050;
+      background-color: #505050;
+      background-size: cover;
       border: 2px solid #FFF;
       box-shadow: 0 0 0 1px #C7C7C7;
     }

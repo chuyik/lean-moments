@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="reactions-panel-divider" v-show="likes && likes.length && commentsData.length"></div>
-        <div class="comments">
+        <div class="comments" v-if="commtentsData.length">
           <div class="comment" v-for="comment in commentsData" track-by="id">
             <span class="comment-nickname" v-text="comment.fromUser"></span>:
             <span class="comment-text" v-text="comment.text"></span>
