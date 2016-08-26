@@ -2,6 +2,8 @@
 
 > Build Wechat Moments with LeanCloud.
 
+<img src="https://storage.360buyimg.com/mtd/home/7-pic_hd1472200852616.jpg" width="600">
+
 ## Build Setup
 
 ``` bash
