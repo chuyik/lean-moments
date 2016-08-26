@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="view">
-      <iframe src="/view/moments" frameborder="0"></iframe>
+      <iframe src="/#!/view/moments" frameborder="0"></iframe>
     </div>
   </div>
 </template>
