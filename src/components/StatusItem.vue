@@ -35,8 +35,7 @@
         <div class="likes-container" v-if="likes && likes.length">
           <img src="../assets/user_like@2x.png">
           <div class="likes">
-            <div class="like" v-for="like in likes" track-by="id">{{like.get('nickname')}}</div>
-          </div>
+            <div class="like" v-for="(index, like) in likes" track-by="id"><span v-if="index > 0">, </span>{{like.get('nickname')}}</div></div>
         </div>
         <div class="reactions-panel-divider" v-show="likes && likes.length && commentsData && commentsData.length"></div>
         <div class="comments" v-if="commentsData && commentsData.length">
@@ -113,7 +112,7 @@ export default {
   },
   methods: {
     like (e) {
-      if (!e.isTrusted) return
+      if (e.isTrusted) return
 
       let currentUser = AV.User.current()
 
@@ -140,13 +139,13 @@ export default {
         })
     },
     comment (e) {
-      if (!e.isTrusted) return
+      if (e.isTrusted) return
       this.showTooltip = false
       this.$dispatch('show-reply', this.item)
     },
     toggleTooltip (e) {
       // workaround: click trigger twice..
-      if (!e.isTrusted) return 
+      if (e.isTrusted) return 
       this.showTooltip = !this.showTooltip
     },
     buildCommentData () {
@@ -337,7 +336,6 @@ export default {
     display: flex;
   }
   .like {
-    padding: 0 8px 0 0;
     font-family: HelveticaNeue-Medium;
     font-size: 14px;
     color: #5E6B8D;

@@ -35,7 +35,8 @@ export default {
   }
 
   .featured {
-    background: #C4C4C4;
+    background-color: #C4C4C4;
+    background-size: cover;
     height: 25.5rem;
     width: 100%;
   }

@@ -43,6 +43,7 @@ body {
 .fixed-header {
   position: fixed;
   z-index: 100;
+  width: 100%;
 }
 
 .view-contents {

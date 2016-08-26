@@ -15,15 +15,15 @@
         <h4 class="weui_media_title">{{user.get('nickname')}}</h4>
       </div>
       <div class="weui_cell_ft">
-        <div v-if="!currentUser || (currentUser.id !== user.id)">
+        <template v-if="!currentUser || (currentUser.id !== user.id)">
           <template v-if="currentUser">
-            <div class="weui_btn weui_btn_mini weui_btn_primary" @click="follow(user)" v-if="followStatusTree[user.id] === 'no'">关注他/她</div>
-            <div class="weui_btn weui_btn_mini weui_btn_plain_default" @click="unfollow(user)" v-if="followStatusTree[user.id] === 'isFollowee'">已关注</div>
-            <div class="weui_btn weui_btn_mini weui_btn_primary" @click="follow(user)" v-if="followStatusTree[user.id] === 'isFollower'">已被关注</div>
-            <div class="weui_btn weui_btn_mini weui_btn_plain_default" @click="unfollow(user)" v-if="followStatusTree[user.id] === 'isBoth'">已互相关注</div>
+            <div id="follow-btn" class="weui_btn weui_btn_mini weui_btn_primary" @click="follow(user)" v-if="followStatusTree[user.id] === 'no'">关注他/她</div>
+            <div id="follow-btn" class="weui_btn weui_btn_mini weui_btn_plain_default" @click="unfollow(user)" v-if="followStatusTree[user.id] === 'isFollowee'">已关注</div>
+            <div id="follow-btn" class="weui_btn weui_btn_mini weui_btn_primary" @click="follow(user)" v-if="followStatusTree[user.id] === 'isFollower'">已被关注</div>
+            <div id="follow-btn" class="weui_btn weui_btn_mini weui_btn_plain_default" @click="unfollow(user)" v-if="followStatusTree[user.id] === 'isBoth'">已互相关注</div>
           </template>
-          <div class="weui_btn weui_btn_mini weui_btn_primary" @click="logIn(user)">用这个账号</div>
-        </div>
+          <div id="login-btn" class="weui_btn weui_btn_mini weui_btn_primary" @click="logIn(user)">用这个账号</div>
+        </template>
         <input type="radio" class="weui_check" value="1" checked v-else><span class="weui_icon_checked"></span>
       </div>
     </div>
@@ -63,12 +63,11 @@ export default {
 
   route: {
     data () {
-      return Promise.all([
-        new AV.Query(AV.User).find(),
-        this.currentUser.followeeQuery().find(), 
-        this.currentUser.followerQuery().find()
-      ])
-      .then(([users, followees, followers]) => ({users, followees, followers}))
+      return new AV.Query(AV.User).find()
+        .then(users => {
+          if (!this.currentUser) return {users}
+          return this.queryUserRelations(users).then(() => ({users}))
+        })
     }
   },
 
@@ -76,16 +75,9 @@ export default {
     users () {
       this.buildFollowStatusTree()
     },
-    currentUser () {
-      Promise.all([
-        this.currentUser.followeeQuery().find(), 
-        this.currentUser.followerQuery().find()
-      ])
-      .then(([followees, followers]) => {
-        this.followees = followees
-        this.followers = followers
-        this.buildFollowStatusTree()
-      })
+    currentUser (val) {
+      if (val)
+        this.queryUserRelations().then(this.buildFollowStatusTree)
     }
   },
 
@@ -134,6 +126,17 @@ export default {
       })
       return {id: user.id, status: isFollowee && isFollower ? 'isBoth' : (isFollowee ? 'isFollowee' : (isFollower ? 'isFollower' : 'no'))}
     },
+    queryUserRelations () {
+      return Promise.all([
+        this.currentUser.followeeQuery().find(),
+        this.currentUser.followerQuery().find()
+      ])
+      .then(([followees, followers]) => {
+        this.followees = followees
+        this.followers = followers
+      })
+      .catch(console.error)
+    },
     buildFollowStatusTree () {
       let tree = {}
       this.users.forEach(user => {
@@ -148,4 +151,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .weui_cell_ft {
+    display: flex;
+  }
+  #login-btn {
+    margin-top: 0;
+    margin-left: 6px;
+  }
+  #follow-btn {
+    display: block;
+  }
 </style>

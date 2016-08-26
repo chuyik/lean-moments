@@ -10,7 +10,7 @@ export default {}
 
 <style lang="scss" scoped>
   #status-bar {
-    height: 2rem;
+    /*height: 2rem;*/
     > img {
         width: 100%;
         vertical-align: middle;
