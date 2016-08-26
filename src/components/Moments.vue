@@ -124,7 +124,7 @@ export default {
       query.include(['source', 'source.avatar', 'images', 'detail', 'detail.likes', 'detail.comments'])
 
       if (!shouldReset && this.messageId)
-        query.sinceId(this.messageId)
+        query.maxId(this.messageId - 1)
 
       return query.find()
         .then(statusItems => {
@@ -135,7 +135,7 @@ export default {
             this.statusItems.splice(0, this.statusItems.length)
           }
           this.statusItems = this.statusItems.concat(statusItems)
-          this.messageId = _.maxBy(statusItems, 'messageId').messageId
+          this.messageId = _.minBy(statusItems, 'messageId').messageId
         })
         .catch(err => {
           console.error('Failed to load status items, err: ', err)
@@ -175,7 +175,7 @@ export default {
     animation: pullup 1s 1 ease-out forwards;
 
     &.show {
-      animation: dropdown 1s 1 ease-out;
+      animation: dropdown 0.5s 1 ease-out;
     }
 
     > .moments-icon {

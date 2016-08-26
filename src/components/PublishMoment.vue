@@ -76,10 +76,8 @@ export default {
       history.back()
     },
     send () {
-      if (!this.text && !this.images.length) {
-        console.warn('publish what?')
-        return
-      }
+      if (!this.text && !this.images.length)
+        return console.warn('publish what?')
       
       let statusDetail = new StatusDetail()
       statusDetail.save()

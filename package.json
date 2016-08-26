@@ -48,6 +48,7 @@
     "leancloud-installation": "^1.0.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "moment": "^2.14.1",
     "node-sass": "^3.8.0",
     "ora": "^0.2.0",
     "sass-loader": "^4.0.0",

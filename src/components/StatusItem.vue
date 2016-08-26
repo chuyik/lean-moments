@@ -3,8 +3,8 @@
     <div class="left"><div class="avatar" :style="{'background-image': `url(${avatarUrl})`}"></div></div>
 
     <div class="right">
-      <div class="nickname">{{nickname}}</div>
-      <div class="text" v-if="text">{{text}}</div>
+      <div class="nickname" v-text="nickname"></div>
+      <div class="text" v-if="text" v-text="text"></div>
       <div class="images" v-if="imageUrls" :class="imagesClass">
         <div class="item" v-for="url in imageUrls">
           <img :src="url">
@@ -12,7 +12,7 @@
       </div>
 
       <div class="footer clearfix">
-        <div class="time-ago">3分钟前</div>
+        <div class="time-ago" v-text="timeAgo"></div>
         <div class="reply-btn-wrap">
           <div class="reply-btn" @click.stop="toggleTooltip">
             <img src="../assets/reply@2x.png" class="retina">
@@ -53,6 +53,7 @@
 <script>
 import AV from 'leancloud-storage'
 import _ from 'lodash'
+import moment from 'moment'
 
 import {Comment} from '../lib/models'
 
@@ -71,12 +72,6 @@ export default {
       commentsData: []
     }
   },
-  // watch: {
-  //   'detail._serverData.comments' () {
-  //     console.log('comments changed')
-  //     this.buildCommentData()
-  //   }
-  // },
   events: {
     'status-item-changed' (statusItemId) {
       if (statusItemId !== this.item.id)
@@ -114,6 +109,7 @@ export default {
     avatarUrl () {
       return this.data.source.get('avatar').get('url')
     },
+    timeAgo () {return moment(this.item.createdAt).fromNow()}
   },
   methods: {
     like (e) {
