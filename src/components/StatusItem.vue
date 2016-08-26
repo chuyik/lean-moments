@@ -38,8 +38,8 @@
             <div class="like" v-for="like in likes" track-by="id">{{like.get('nickname')}}</div>
           </div>
         </div>
-        <div class="reactions-panel-divider" v-show="likes && likes.length && commentsData.length"></div>
-        <div class="comments" v-if="commtentsData.length">
+        <div class="reactions-panel-divider" v-show="likes && likes.length && commentsData && commentsData.length"></div>
+        <div class="comments" v-if="commentsData && commentsData.length">
           <div class="comment" v-for="comment in commentsData" track-by="id">
             <span class="comment-nickname" v-text="comment.fromUser"></span>:
             <span class="comment-text" v-text="comment.text"></span>
@@ -164,6 +164,7 @@ export default {
             text: comment.get('text')
           }
         })
+        console.log('commentsData: ', commentsData)
         this.commentsData.splice(0, commentsData.length)
         this.commentsData = this.commentsData.concat(commentsData)
       })
