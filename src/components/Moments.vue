@@ -15,7 +15,7 @@
       :pullup-config="pullupConfig">
 
       <Usercover :user="currentUser"></Usercover>
-      <div class="new-message" v-if="newMessageCount">
+      <div class="new-message" v-if="newMessageCount" @click="loadStatusItems(true)">
         <div class="new-message-count">有 {{newMessageCount}} 条新消息</div>
         <i></i>
       </div>

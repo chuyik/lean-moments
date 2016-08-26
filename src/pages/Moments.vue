@@ -12,7 +12,8 @@ export default {}
 
 <style lang="scss" scoped>
 .container {
-  background: #aee0ae;
+  background-image: linear-gradient(to left, rgb(82, 82, 82), rgb(61, 114, 180));
+  background-color: rgb(61, 114, 180);
   position: absolute;
   left: 0;
   top: 0;
