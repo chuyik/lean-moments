@@ -55,6 +55,7 @@ import _ from 'lodash'
 import moment from 'moment'
 
 import {Comment} from '../lib/models'
+import {batchFetchUsers} from '../lib/users'
 
 export default {
   components: {
@@ -78,9 +79,8 @@ export default {
       
       this.detail.fetch({include: 'likes,comments'}, {})
         .then(detail => {
-          // TODO 用户缓存
-          return Promise.all(detail.get('comments').map(comment => comment.get('user').fetch()))
-          .then(users => {
+          batchFetchUsers(detail.get('comments'), 'user')
+          .then(comments => {
             this.buildCommentData()
           })
         })
@@ -152,11 +152,9 @@ export default {
       if (!this.detail.get('comments'))
         return
       
-      // TODO 用户缓存
-      Promise.all(this.detail.get('comments')
-      .map(comment => comment.get('user').fetch()))
-      .then(() => {
-        let commentsData = this.detail.get('comments').map(comment => {
+      batchFetchUsers(this.detail.get('comments'), 'user')
+      .then(comments => {
+        let commentsData = comments.map(comment => {
           return {
             id: comment.getObjectId(),
             fromUser: comment.get('user').get('nickname'),
